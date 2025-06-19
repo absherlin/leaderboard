@@ -41,7 +41,7 @@
             max-width: 400px;
             box-shadow: 0 0 15px rgba(255, 146, 12, 0.7);
             text-align: center;
-            margin-top: 50px; /* Memberi sedikit jarak dari atas */
+            margin-top: 50px;
         }
 
         .login-container h2 {
@@ -95,15 +95,14 @@
 
         /* Styling for the panel after login */
         #main-panel-content {
-            display: none; /* Sembunyikan konten panel admin secara default */
+            display: none;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding-top: 20px; /* Sesuaikan padding agar tidak terlalu mepet header */
+            padding-top: 20px;
         }
-
 
         /* Re-applying core styles from previous example for consistency */
         .ardframe {
@@ -111,13 +110,11 @@
             border-radius: 10px;
             padding: 10px;
             background-color: #333;
-            /* Darker background for frames */
         }
 
         .title-container {
             width: 100%;
             max-width: 800px;
-            /* Adjust max-width for overall content */
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
@@ -130,7 +127,6 @@
         }
 
         .title h1 {
-            /* NEW: Styling for LEADERBOARD title */
             font-size: 3em;
             color: #FF920C;
             text-shadow: 0 0 5px #FF920C, 0 0 10px rgba(255, 146, 12, 0.5);
@@ -142,13 +138,11 @@
         .marquee {
             line-height: 30px;
             width: 75.5%;
-            /* Adjusted for panel layout */
             overflow: hidden;
             position: relative;
             height: 30px;
             background: #000;
             border: 1px solid #FF920C;
-            /* Added border to marquee */
             border-radius: 5px;
         }
 
@@ -203,7 +197,6 @@
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
-            /* Space below panel */
             width: 100%;
             max-width: 600px;
             box-shadow: 0 0 15px rgba(208, 168, 89, 0.7);
@@ -254,7 +247,6 @@
 
         .admin-panel button.update-btn {
             background-color: #007bff;
-            /* Blue for update */
             margin-top: 5px;
         }
 
@@ -264,7 +256,6 @@
 
         .admin-panel button.delete-btn {
             background-color: #dc3545;
-            /* Red for delete */
             margin-top: 5px;
         }
 
@@ -310,7 +301,6 @@
         .checkpoin {
             width: 100%;
             max-width: 800px;
-            /* Max width for leaderboard */
             margin: 0 auto;
             padding: 20px;
             background-color: #333;
@@ -355,7 +345,6 @@
 
         .table-ard-container {
             max-height: 350px;
-            /* Limit height to show 5-6 rows initially */
             overflow-y: auto;
             border: 3px #FF920C groove;
             border-radius: 10px;
@@ -379,7 +368,6 @@
             top: 0;
             z-index: 1;
         }
-
 
         .table-ard tbody td {
             font-family: 'Anek Latin', sans-serif;
@@ -417,11 +405,9 @@
             flex: 1;
             max-width: 200px;
             text-align: center;
-            /* Hide by default as requested */
             display: none;
         }
 
-        /* NEW: Styles for Reward Image */
         .reward-image-container {
             width: 100%;
             text-align: center;
@@ -437,9 +423,7 @@
             box-shadow: 0 0 15px rgba(255, 146, 12, 0.7);
         }
 
-        /* Mobile specific adjustments */
         @media (max-width: 767px) {
-
             .checkpoin,
             .admin-panel {
                 width: 95%;
@@ -624,35 +608,46 @@
                 </div>
             </div>
         </div>
-    </div> <script>
-        // --- Leaderboard Data (Simulasi Database di Frontend) ---
-        // Load data from localStorage if available, otherwise use initial data
-        let leaderboardData = JSON.parse(localStorage.getItem('leaderboardData')) || [
-            // Contoh data awal, sesuai format yang ada di screenshot
-            { username: 'AdUser22', point: 1000, joined_date: '01-06-2025' },
-            { username: 'AgUserET', point: 950, joined_date: '01-06-2025' },
-            { username: 'AkUser77', point: 800, joined_date: '01-06-2025' },
-            { username: 'AlUser18', point: 750, joined_date: '01-06-2025' },
-            { username: 'ApUserAA', point: 700, joined_date: '01-06-2025' },
-            { username: 'ArUser35', point: 650, joined_date: '01-06-2025' },
-            { username: 'BeUser55', point: 600, joined_date: '01-06-2025' },
-            { username: 'BhUser66', point: 550, joined_date: '01-06-2025' },
-            { username: 'buUserKE', point: 500, joined_date: '01-06-2025' },
-            { username: 'ChUser99', point: 450, joined_date: '01-06-2025' },
-            { username: 'D4UserAK', point: 400, joined_date: '01-06-2025' },
-            { username: 'daUser88', point: 350, joined_date: '01-06-2025' },
-        ];
+    </div> <script type="module">
+        // Import Supabase Client
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js';
+
+        // GANTI DENGAN PROJECT URL DAN ANON KEY DARI DASHBOARD SUPABASE KAMU
+        const SUPABASE_URL = 'https://atfmpqijdplvpqofxnqt.supabase.co'; 
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0Zm1wcWlqZHBsdnBxb2Z4bnF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAzMjM3OTgsImV4cCI6MjA2NTg5OTc5OH0.55M47VWHsZdzFcRB9-PB9sx12R76sIX70DKr2gZuauc'; 
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // --- Leaderboard Data (Sekarang dari Supabase, bukan localStorage) ---
+        let leaderboardData = []; 
 
         // --- Fungsi untuk Memformat Username (Masking) ---
         function maskUsername(username) {
-            if (username.length <= 4) return username; // Jika terlalu pendek, jangan di-mask
+            if (username.length <= 4) return username;
             return username.substring(0, 2) + "***" + username.substring(username.length - 2, username.length);
         }
 
-        // --- Fungsi untuk Menampilkan Data Leaderboard ---
+        // --- Fungsi untuk Menampilkan Data Leaderboard dari Supabase ---
+        async function fetchAndRenderLeaderboard() {
+            const { data, error } = await supabase
+                .from('leaderboard') // 'leaderboard' adalah nama tabel kamu di Supabase
+                .select('*')
+                .order('point', { ascending: false }); // Urutkan dari poin tertinggi
+
+            if (error) {
+                console.error('Error fetching leaderboard:', error.message);
+                $('.table-ard tbody').html('<tr><td colspan="3" style="border: 3px #FF920C groove; color: red; text-align: center;">Error loading data: ' + error.message + '</td></tr>');
+                leaderboardData = []; // Kosongkan data jika ada error
+                return;
+            }
+            leaderboardData = data; // Update data lokal dengan yang dari Supabase
+            renderLeaderboard(leaderboardData); // Panggil fungsi render HTML yang sudah ada
+        }
+
+        // Fungsi renderLeaderboard (tidak perlu diubah banyak, hanya menerima data)
         function renderLeaderboard(dataToShow) {
             let htmlView = '';
-            const tbody = $('.table-ard tbody'); // Menggunakan jQuery untuk tbody leaderboard
+            const tbody = $('.table-ard tbody');
 
             if (dataToShow.length <= 0) {
                 htmlView += `
@@ -666,32 +661,41 @@
                         `<tr>
                             <td class="mb-3 table-ard-point position-relative"
                                 style="border: unset; border-radius: 10px; padding: 5px; text-shadow: 0 0 3px #000000, 0 0 5px #000000; border-color: #d0a859; color: #fff; border: 3px #FF920C groove;">` +
-                        maskUsername(player.username) + `</td>
+                    maskUsername(player.username) + `</td>
                             <td class="mb-3 table-ard-point position-relative"
                                 style="border: unset; border-radius: 10px; padding: 5px; text-shadow: 0 0 3px #000000, 0 0 5px #000000; border-color: #d0a859; color: #fff; border: 3px #FF920C groove;">` +
-                        player.point + `</td>
+                    player.point + `</td>
                             <td class="mb-3 table-ard-point position-relative"
                                 style="border: unset; border-radius: 10px; padding: 5px; text-shadow: 0 0 3px #000000, 0 0 5px #000000; border-color: #d0a859; color: #fff; border: 3px #FF920C groove;">` +
-                        player.joined_date + `</td>
+                    player.joined_date + `</td>
                         </tr>`;
                 }
             }
-            // Select the tbody within the .table-ard to avoid affecting the admin list table
             $('.table-ard tbody').html(htmlView);
         }
 
-        // --- Fungsi untuk Menampilkan Data ID Admin ---
-        function renderAdminIdList() {
+        // --- Fungsi untuk Menampilkan Data ID Admin dari Supabase ---
+        async function renderAdminIdList() {
             let htmlView = '';
             const adminIdListBody = $('#admin_id_list_body');
 
-            if (leaderboardData.length <= 0) {
+            const { data: players, error } = await supabase
+                .from('leaderboard')
+                .select('username'); // Ambil hanya username
+
+            if (error) {
+                console.error('Error fetching admin list:', error.message);
+                adminIdListBody.html('<tr><td colspan="2" style="text-align: center; color: red;">Error loading admin list.</td></tr>');
+                return;
+            }
+
+            if (players.length <= 0) {
                 htmlView += `
                     <tr>
                         <td colspan="2" style="text-align: center;">No player IDs added yet.</td>
                     </tr>`;
             } else {
-                leaderboardData.forEach(player => {
+                players.forEach(player => {
                     htmlView += `
                         <tr>
                             <td>${player.username}</td>
@@ -714,8 +718,8 @@
             renderLeaderboard(filteredData);
         }
 
-        // --- Fungsi Panel Admin: Tambah / Update Player ---
-        function addOrUpdatePlayer() {
+        // --- Fungsi Panel Admin: Tambah / Update Player ke Supabase ---
+        async function addOrUpdatePlayer() {
             let id = $('#admin_user_id').val().trim();
             let points = parseInt($('#admin_points').val());
             let date = $('#admin_joined_date').val();
@@ -725,36 +729,53 @@
                 return;
             }
 
-            // Format tanggal ke DD-MM-YYYY jika inputnya YYYY-MM-DD
-            if (date.includes('-')) {
-                const [year, month, day] = date.split('-');
-                date = `${day}-${month}-${year}`;
+            // Format tanggal ke YYYY-MM-DD untuk Supabase
+            // Jika inputnya DD-MM-YYYY, ubah dulu
+            if (!date.includes('-') || date.split('-')[0].length === 2) { 
+                const [day, month, year] = date.split('-');
+                date = `${year}-${month}-${day}`;
             }
 
-            let playerIndex = leaderboardData.findIndex(p => p.username === id);
+            // Cek apakah player sudah ada
+            const { data: existingPlayer, error: fetchError } = await supabase
+                .from('leaderboard')
+                .select('id') // Hanya ambil ID jika ada
+                .eq('username', id)
+                .single(); // Mencari satu baris yang cocok
 
-            if (playerIndex !== -1) {
-                // Update existing player
-                leaderboardData[playerIndex].point = points;
-                leaderboardData[playerIndex].joined_date = date;
-                alert(`Player ${id} berhasil diupdate!`);
+            if (fetchError && fetchError.code !== 'PGRST116') { // PGRST116 berarti 'No rows found'
+                console.error('Error checking player:', fetchError.message);
+                alert('Terjadi kesalahan saat memeriksa player: ' + fetchError.message);
+                return;
+            }
+
+            let response;
+            if (existingPlayer) {
+                // Update player jika sudah ada
+                response = await supabase
+                    .from('leaderboard')
+                    .update({ point: points, joined_date: date })
+                    .eq('username', id);
             } else {
-                // Add new player
-                leaderboardData.push({ username: id, point: points, joined_date: date });
-                alert(`Player ${id} berhasil ditambahkan!`);
+                // Insert new player jika belum ada
+                response = await supabase
+                    .from('leaderboard')
+                    .insert([{ username: id, point: points, joined_date: date }]);
             }
 
-            // Urutkan ulang data setelah penambahan/pembaruan (misal berdasarkan poin tertinggi)
-            leaderboardData.sort((a, b) => b.point - a.point);
-            saveLeaderboardData(); // Simpan ke localStorage
-
-            renderLeaderboard(leaderboardData); // Perbarui tampilan leaderboard
-            renderAdminIdList(); // Perbarui tampilan daftar ID admin
-            clearAdminForm(); // Bersihkan form
+            if (response.error) {
+                console.error('Error saving player:', response.error.message);
+                alert(`Gagal menyimpan player: ${response.error.message}`);
+            } else {
+                alert(`Player ${id} berhasil disimpan!`);
+                await fetchAndRenderLeaderboard(); // Ambil data terbaru dan render ulang leaderboard
+                await renderAdminIdList(); // Perbarui daftar ID admin
+                clearAdminForm(); // Bersihkan form
+            }
         }
 
-        // --- Fungsi Panel Admin: Hapus Player ---
-        function deletePlayer() {
+        // --- Fungsi Panel Admin: Hapus Player dari Supabase ---
+        async function deletePlayer() {
             let idToDelete = $('#admin_user_id').val().trim();
 
             if (!idToDelete) {
@@ -762,17 +783,19 @@
                 return;
             }
 
-            const initialLength = leaderboardData.length;
-            leaderboardData = leaderboardData.filter(p => p.username !== idToDelete);
+            const { error } = await supabase
+                .from('leaderboard')
+                .delete()
+                .eq('username', idToDelete); // Hapus berdasarkan username
 
-            if (leaderboardData.length < initialLength) {
-                alert(`Player ${idToDelete} berhasil dihapus!`);
-                saveLeaderboardData(); // Simpan ke localStorage
-                renderLeaderboard(leaderboardData); // Perbarui tampilan
-                renderAdminIdList(); // Perbarui tampilan daftar ID admin
-                clearAdminForm(); // Bersihkan form
+            if (error) {
+                console.error('Error deleting player:', error.message);
+                alert(`Gagal menghapus player: ${error.message}`);
             } else {
-                alert(`Player ${idToDelete} tidak ditemukan.`);
+                alert(`Player ${idToDelete} berhasil dihapus!`);
+                await fetchAndRenderLeaderboard(); // Ambil data terbaru dan render ulang leaderboard
+                await renderAdminIdList(); // Perbarui daftar ID admin
+                clearAdminForm(); // Bersihkan form
             }
         }
 
@@ -780,40 +803,30 @@
         function clearAdminForm() {
             $('#admin_user_id').val('');
             $('#admin_points').val('0');
-            // Set default date for joined_date input to today
             const today = new Date();
             const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0!
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
             const dd = String(today.getDate()).padStart(2, '0');
             $('#admin_joined_date').val(`${yyyy}-${mm}-${dd}`);
         }
 
-        // --- NEW: Fungsi untuk menyimpan data ke LocalStorage ---
-        function saveLeaderboardData() {
-            localStorage.setItem('leaderboardData', JSON.stringify(leaderboardData));
-        }
-
-        // --- Reward List Carousel Toggling ---
+        // --- Reward List Carousel Toggling (tetap ada meskipun tombolnya disembunyikan) ---
         function showRewardList() {
-            document.querySelector(".layer2").style.display = "flex"; /* Show the layer2 */
-            document.querySelector("html").classList.add("activex2"); /* Add class to HTML */
-            setCarouselImages(); // Ensure images are set correctly on show
+            document.querySelector(".layer2").style.display = "flex";
+            document.querySelector("html").classList.add("activex2");
+            setCarouselImages();
         }
 
         function hideRewardList() {
-            document.querySelector(".layer2").style.display = "none"; /* Hide the layer2 */
-            document.querySelector("html").classList.remove("activex2"); /* Remove class from HTML */
+            document.querySelector(".layer2").style.display = "none";
+            document.querySelector("html").classList.remove("activex2");
         }
 
         function setCarouselImages() {
             const carouselImage1 = document.getElementById('carouselImage1');
             const carouselImage2 = document.getElementById('carouselImage2');
-
-            // Set a default/placeholder src if the actual images are not found or loaded yet
             carouselImage1.src = carouselImage1.dataset.defaultSrc || "https://via.placeholder.com/400x300?text=Reward+1";
             carouselImage2.src = carouselImage2.dataset.defaultSrc || "https://via.placeholder.com/400x300?text=Reward+2";
-
-            // Check screen width for mobile/desktop images
             if (window.innerWidth <= 767) {
                 carouselImage1.src = "https://cdn-master.it-cg.group/MONEYSITE/AI88%20VIP/Checkpoin/AIVIP006%20B_.png";
                 carouselImage2.src = "https://cdn-master.it-cg.group/MONEYSITE/AI88%20VIP/Checkpoin/AIVIP006%20A.png";
@@ -821,7 +834,6 @@
                 carouselImage1.src = "https://cdn-master.it-cg.group/MONEYSITE/AI88%20VIP/Checkpoin/AIVIP006%20D.png";
                 carouselImage2.src = "https://cdn-master.it-cg.group/MONEYSITE/AI88%20VIP/Checkpoin/AIVIP006%20C.png";
             }
-            // Add d-block class for Bootstrap carousel to display images
             carouselImage1.classList.add('d-block');
             carouselImage2.classList.add('d-block');
         }
@@ -830,42 +842,33 @@
         const CORRECT_USERNAME = "CSPSJ";
         const CORRECT_PASSWORD = "Click8899";
 
-        function checkLogin() {
+        async function checkLogin() { 
             const usernameInput = $('#username').val();
             const passwordInput = $('#password').val();
             const errorMessage = $('#login-error-message');
 
             if (usernameInput === CORRECT_USERNAME && passwordInput === CORRECT_PASSWORD) {
-                $('#login-form').hide(); // Sembunyikan form login
-                $('#main-panel-content').show(); // Tampilkan konten panel utama
-                // Panggil inisialisasi panel admin setelah login
-                initAdminPanel(); 
+                $('#login-form').hide();
+                $('#main-panel-content').show();
+                await initAdminPanel(); 
             } else {
                 errorMessage.text("ID Pengguna atau Kata Sandi salah!");
-                errorMessage.show(); // Tampilkan pesan error
+                errorMessage.show();
             }
         }
 
         // Fungsi inisialisasi panel admin yang akan dipanggil setelah login
-        function initAdminPanel() {
-            // Inisialisasi tampilan leaderboard dengan data dari localStorage atau data awal
-            renderLeaderboard(leaderboardData);
-            // Inisialisasi tampilan daftar ID admin
-            renderAdminIdList();
+        async function initAdminPanel() { 
+            await fetchAndRenderLeaderboard(); 
+            await renderAdminIdList(); 
 
-            // Bind search function to keyup on user input field
             $('#user').on('keyup', function () {
                 searchLeaderboard();
             });
-
-            // Set default date for joined_date input to today
-            clearAdminForm(); // This also sets the current date
-
-            // Initial call for carousel images (if still needed, though buttons are hidden)
+            clearAdminForm();
             setCarouselImages();
-            $(window).on('resize', setCarouselImages); // Re-set on resize
+            $(window).on('resize', setCarouselImages);
         }
-
 
         // --- Inisialisasi Saat Dokumen Siap ---
         $(document).ready(function () {
