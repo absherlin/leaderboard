@@ -155,13 +155,24 @@
         }
 
         .sidebar-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
+            /* PERUBAHAN STYLE: Menggunakan flexbox untuk menengahkan logo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 0 20px 0; /* Padding disesuaikan */
             border-bottom: 1px solid #FFD700;
+        }
+        
+        .sidebar-header img {
+            max-width: 120px; /* Sedikit diperbesar agar pas */
+            height: auto;
+            /* margin-bottom dihapus */
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
         }
 
         .sidebar-header h2 {
+            /* Style ini tidak lagi digunakan, tapi dibiarkan jika ingin dikembalikan */
             color: #FFD700;
             text-shadow: 0 0 5px #FFD700;
             font-size: 1.8em;
@@ -867,7 +878,7 @@
     <div id="main-panel-content">
         <div class="sidebar">
             <div class="sidebar-header">
-                <h2>Admin Panel</h2>
+                <img src="https://cdn.it-cg.group/mysterybox/uploads/684c61560f2b8.Logo%20(2).png" alt="Admin Logo">
             </div>
             <nav class="sidebar-menu">
                 <ul>
@@ -1116,9 +1127,9 @@
 
             if (dataToShow.length <= 0) {
                 htmlView += `
-                    <tr>
-                        <td colspan="3" style="border: unset; border-radius: 10px; padding: 5px; text-shadow: 0 0 3px #000000, 0 0 5px #000000; border-color: #d0a859; color: #fff; border: 3px #FF920C groove; ">No data.</td>
-                    </tr>`;
+                        <tr>
+                            <td colspan="3" style="border: unset; border-radius: 10px; padding: 5px; text-shadow: 0 0 3px #000000, 0 0 5px #000000; border-color: #d0a859; color: #fff; border: 3px #FF920C groove; ">No data.</td>
+                        </tr>`;
             } else {
                 dataToShow.sort((a, b) => b.point - a.point);
 
@@ -1126,13 +1137,13 @@
                     let player = dataToShow[i];
                     htmlView +=
                         `<tr>
-                            <td class="mb-3 table-ard-point position-relative">` +
+                                <td class="mb-3 table-ard-point position-relative">` +
                         maskUsername(player.username) + `</td>
-                            <td class="mb-3 table-ard-point position-relative">` +
+                                <td class="mb-3 table-ard-point position-relative">` +
                         player.point + `</td>
-                            <td class="mb-3 table-ard-point position-relative">` +
+                                <td class="mb-3 table-ard-point position-relative">` +
                         player.joined_date + `</td>
-                        </tr>`;
+                            </tr>`;
                 }
             }
             tbody.html(htmlView);
@@ -1145,18 +1156,18 @@
 
             if (leaderboardData.length <= 0) {
                 htmlView += `
-                    <tr>
-                        <td colspan="2" style="text-align: center;">No player IDs added yet.</td>
-                    </tr>`;
+                        <tr>
+                            <td colspan="2" style="text-align: center;">No player IDs added yet.</td>
+                        </tr>`;
             } else {
                 const sortedLeaderboardData = [...leaderboardData].sort((a, b) => a.username.localeCompare(b.username));
                 sortedLeaderboardData.forEach(player => {
                     htmlView += `
-                        <tr>
-                            <td>${player.username}</td>
-                            <td>${maskUsername(player.username)}</td>
-                        </tr>
-                    `;
+                                <tr>
+                                    <td>${player.username}</td>
+                                    <td>${maskUsername(player.username)}</td>
+                                </tr>
+                            `;
                 });
             }
             adminIdListBody.html(htmlView);
